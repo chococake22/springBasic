@@ -1,8 +1,12 @@
 package hello.core.member;
 
+
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository {
 
     // DB랑 연결되지 않아서 그냥 테스트용으로만 사용하기 위해서 만들었음
