@@ -1,17 +1,22 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class OrderServiceImpl implements OrderService {
 
+    // final을 넣을 경우 생성자에서 값이 들어오지 않으면 오류를 알려준다. (누락을 막을 수 있다)
     private final MemberRepository memberRepository;
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     private final DiscountPolicy discountPolicy;
@@ -26,9 +31,9 @@ public class OrderServiceImpl implements OrderService {
 
     // 해결하려면 누군가가 discountPolicy에다가 객체를 생성하고 주입해주어야 한다.
 
-
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    // 생성자 주입은 호출 시점에 딱 한번만 호출되는 것이 보장된다
+    // 그래서 불변, 필수 의존관계에 사용된다.
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }

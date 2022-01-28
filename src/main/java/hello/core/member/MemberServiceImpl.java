@@ -10,7 +10,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     // 생성자 자동으로 의존관계를 주입한다
-    // 지금은 MemoryMemberRepository를 컴포넌트로 해서 빈으로 등록이 되었기 때문에 MemoryMemberRepository를 자동으로 주입한다.
+    // 지금은 MemoryMemberRepository가 컴포넌트로 해서 빈으로 등록이 되었기 때문에 MemoryMemberRepository를 자동으로 주입한다.
     // ac.getBean(MemberRepository.class)랑 같은 역할
     @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
